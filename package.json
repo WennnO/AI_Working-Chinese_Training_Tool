@@ -1,0 +1,27 @@
+{
+  "name": "ai-working-chinese-training-tool",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A local web app for Mandarin work communication training.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WennnO/AI_Working-Chinese_Training_Tool.git"
+  },
+  "keywords": [
+    "mandarin",
+    "language-learning",
+    "communication",
+    "openai",
+    "speech-to-text",
+    "fine-tuning"
+  ],
+  "workspaces": ["server", "client"],
+  "scripts": {
+    "dev": "concurrently -n server,client -c cyan,magenta \"npm --workspace server run dev\" \"npm --workspace client run dev\"",
+    "build": "npm --workspace server run build && npm --workspace client run build",
+    "setup": "npm install && npm --workspace server run db:init",
+    "db:init": "npm --workspace server run db:init"
+  },
+  "devDependencies": { "concurrently": "^9.1.2" }
+}
