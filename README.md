@@ -30,15 +30,7 @@ Why:
 English often says "make sure something is aligned with everyone", but in workplace Mandarin it is more natural to say "确认大家理解一致".
 ```
 
-## Screenshot
-
-Place your web app screenshot here:
-
-```text
-docs/assets/demo-screenshot.png
-```
-
-After adding the image file, it will render here:
+## Demo Screenshot
 
 ![Demo screenshot](docs/assets/demo-screenshot.png)
 
