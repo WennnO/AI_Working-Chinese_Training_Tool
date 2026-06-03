@@ -1,0 +1,7 @@
+interface:
+  display_name: "AI Working Chinese Coach"
+  short_description: "Coach workplace Mandarin expression"
+  default_prompt: "Use $ai-working-chinese-coach to correct English-influenced Mandarin into natural workplace Chinese."
+
+policy:
+  allow_implicit_invocation: true

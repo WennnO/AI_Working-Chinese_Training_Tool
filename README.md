@@ -208,6 +208,16 @@ This project uses the following OpenAI API capabilities:
 
 Model availability and fine-tuning support depend on your OpenAI account and the models enabled for your project.
 
+## Codex Skill
+
+This repository also includes a lightweight Codex skill:
+
+```text
+skills/ai-working-chinese-coach/
+```
+
+The skill documents the Mandarin workplace coaching logic used by the app. It is useful when asking Codex to maintain prompts, generate training examples, refine correction behavior, or extend this project without changing the core product direction.
+
 ## Fine-tuning Workflow
 
 The app can save correction results as training examples. These examples are stored locally and can be exported as JSONL through:
@@ -335,6 +345,16 @@ docs/assets/demo-screenshot.png
 - AI：OpenAI Responses API
 - 录音转文字：OpenAI Audio Transcriptions API
 - 微调：OpenAI Files API + Fine-tuning API
+
+## Codex Skill
+
+这个仓库也包含一个轻量 Codex skill：
+
+```text
+skills/ai-working-chinese-coach/
+```
+
+它不会影响 web app 的运行，只是把“中文职场表达教练”的判断方式、输出格式、训练样本标准单独沉淀下来。以后用 Codex 维护 prompt、生成训练样本、扩展功能时，可以保持这个项目的产品方向一致。
 
 ## 安装
 
