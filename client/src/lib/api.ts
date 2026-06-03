@@ -28,9 +28,9 @@ export async function requestCorrection(inputText: string, mode: CoachMode) {
   return parseResponse<CorrectionResponse>(response);
 }
 
-export async function transcribeRecording(blob: Blob) {
+export async function transcribeRecording(blob: Blob, extension = "webm") {
   const form = new FormData();
-  form.append("audio", blob, "recording.webm");
+  form.append("audio", blob, `recording.${extension}`);
   const response = await fetch("/api/transcribe", { method: "POST", body: form });
   return parseResponse<{ text: string }>(response);
 }

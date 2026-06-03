@@ -4,23 +4,44 @@ import { transcribeRecording } from "../lib/api";
 
 type RecorderProps = { onTranscript: (text: string) => void; onError: (message: string) => void };
 
+const recordingFormats = [
+  { mimeType: "audio/webm;codecs=opus", extension: "webm" },
+  { mimeType: "audio/webm", extension: "webm" },
+  { mimeType: "audio/mp4", extension: "mp4" },
+  { mimeType: "audio/mpeg", extension: "mp3" },
+  { mimeType: "audio/ogg;codecs=opus", extension: "ogg" },
+  { mimeType: "audio/wav", extension: "wav" }
+];
+
+function getSupportedRecordingFormat() {
+  return recordingFormats.find((format) => MediaRecorder.isTypeSupported(format.mimeType));
+}
+
 export function Recorder({ onTranscript, onError }: RecorderProps) {
   const recorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<BlobPart[]>([]);
+  const extensionRef = useRef("webm");
   const [recording, setRecording] = useState(false);
   const [busy, setBusy] = useState(false);
 
   async function start() {
     try {
+      const format = getSupportedRecordingFormat();
+      if (!format) {
+        onError("当前浏览器不支持可转写的录音格式。请换 Chrome、Edge 或 Safari 再试。");
+        return;
+      }
+
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const recorder = new MediaRecorder(stream);
+      const recorder = new MediaRecorder(stream, { mimeType: format.mimeType });
+      extensionRef.current = format.extension;
       chunksRef.current = [];
       recorder.ondataavailable = (event) => chunksRef.current.push(event.data);
       recorder.onstop = async () => {
         setBusy(true);
         try {
-          const blob = new Blob(chunksRef.current, { type: "audio/webm" });
-          const result = await transcribeRecording(blob);
+          const blob = new Blob(chunksRef.current, { type: format.mimeType });
+          const result = await transcribeRecording(blob, extensionRef.current);
           onTranscript(result.text);
         } catch (error) {
           onError(error instanceof Error ? error.message : "录音转文字失败");
