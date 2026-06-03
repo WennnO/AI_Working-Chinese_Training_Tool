@@ -299,15 +299,9 @@ AI_Working-Chinese_Training_Tool 是一个本地 web app，面向长期在英文
 英文里常说 “make sure something is aligned with everyone”，但中文工作场景里更自然的是“确认大家理解一致”。
 ```
 
-## 截图位置
+## Demo Screenshot / 演示截图
 
-你可以把网页截图放在：
-
-```text
-docs/assets/demo-screenshot.png
-```
-
-放进去之后，README 上方的截图区域会自动显示。
+![演示截图](docs/assets/demo-screenshot.png)
 
 ## 为什么做这个项目
 
